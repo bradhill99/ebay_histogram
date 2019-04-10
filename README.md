@@ -20,10 +20,11 @@ This projec is to
 * Click **Get OAtuh Application Token**
 * Then make http request by using application token:
 
-HTTP method|      GET
+HTTP component|value
 --- | ---
+method|      GET
 URL (Production)| https://api.ebay.com/buy/browse/v1/item_summary/search?category_ids=108765&q=Beatles&filter=price:[200..500]&filter=priceCurrency:USD&limit=10
-HTTP headers|Authorization = Bearer <Application-token-value>
+headers|Authorization: Bearer \<Application-token-value\>
 
 ### OAuth Access Token
 Has two kinds of flow to get token
@@ -70,5 +71,28 @@ Authorization: Bearer <token>
 
 ## Parse json response using jq
 ```
+# example
 jq '.itemSummaries[]| {title: .title, buyingOptions:.buyingOptions}'
+# find title and list type from finding API response
+jq '.findCompletedItemsResponse[0].searchResult[0].item[]| {title: .title, buyingOptions:.listingInfo[0].listingType}'
 ```
+
+## API endpoint
+Environment | URL
+--- | ---
+Sandbox| https://api.ebay.com
+Production | https://api.sandbox.ebay.com
+
+## Finding API
+Environment | URL
+--- | ---
+Sandbox| http://svcs.sandbox.ebay.com/services/search/FindingService/v1 
+Production | http://svcs.ebay.com/services/search/FindingService/v1
+
+## Ebay site
+Environment | URL
+--- | ---
+Sandbox| https://sandbox.ebay.com
+Production | https://ebay.com
+
+
