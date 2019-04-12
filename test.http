@@ -56,5 +56,16 @@ GET http://svcs.ebay.com/services/search/FindingService/v1
    &itemFilter(2).value=2019-04-02T00:00:00.000Z
    &sortOrder=EndTimeSoonest
    &paginationInput.pageNumber=1
+   &aspectFilter(0).aspectName=Product
+   &aspectFilter(0).aspectValueName=Box
 Authorization: Bearer <accessToken>
 
+## get aspect list for specific category
+GET http://svcs.ebay.com/services/search/FindingService/v1
+   ?OPERATION-NAME=getHistograms
+   &SERVICE-VERSION=1.0.0
+   &SECURITY-APPNAME=<Cient ID>
+   &RESPONSE-DATA-FORMAT=JSON
+   &REST-PAYLOAD
+   &categoryId=212
+Authorization: Bearer <accessToken>
