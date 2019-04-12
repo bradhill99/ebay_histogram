@@ -58,7 +58,7 @@ def do_query(access_token, start_date, end_date, pagination):
 
     r_dict = json.loads(r.text)
     try:
-        r_dict['findCompletedItemsResponse'][0]['searchResult'][0]['item'] = post_process(r_dict['findCompletedItemsResponse'][0]['searchResult'][0]['item'])
+        post_process(r_dict['findCompletedItemsResponse'][0]['searchResult'][0]['item'])
     except:
         print(r.text)
         raise ValueError('key exception')
@@ -67,15 +67,9 @@ def do_query(access_token, start_date, end_date, pagination):
     return r_dict
 
 def post_process(items):
-    # remove item with title has "break"
-    # add @timestamp key
-    filter_items = [ item for item in items if "break" not in item['title'][0].lower() ]
-    add_timestamp_field(filter_items)
-    return filter_items
-
-def add_timestamp_field(items):
     for item in items:
         item['@timestamp'] = item['listingInfo'][0]['endTime'][0]
+        item['currentPrice'] = float(item['sellingStatus'][0]['currentPrice'][0]['__value__'])
 
 def query_completed_items(access_token, start_date, end_date):
     pagination = 1
