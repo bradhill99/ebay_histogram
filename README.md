@@ -59,6 +59,7 @@ Category ID|      Category Name
 215 | Football Cards
 213 | Baseball Cards
 214 | Basketball Cards
+212 | (Sports Trading Cards)
 
 ## Search example
 * Find sold items for 2018 panini contenders football for the past 3 months with catelog = football trading cards
