@@ -1,0 +1,13 @@
+{"user" : "kimchy","post_date" : "2009-11-15T14:12:12","message" : "trying out Elastic Search"}
+{"user" : "kimchy_2","post_date" : "2009-11-15T14:12:12","message" : "trying out Elastic Search 2"}
+
+
+
+while IFS="" read -r p || [ -n "$p" ]
+do
+  printf '%s\n' "$p"
+  curl -X POST "localhost:9200/twitter/_doc/" -H 'Content-Type: application/json' -d"${p}" 
+done < request.txt
+
+
+curl -X GET "localhost:9200/twitter/_search?q=user:kimchy"
