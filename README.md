@@ -77,6 +77,33 @@ jq '.itemSummaries[]| {title: .title, buyingOptions:.buyingOptions}'
 # find title and list type from finding API response
 jq '.findCompletedItemsResponse[0].searchResult[0].item[]| {title: .title, buyingOptions:.listingInfo[0].listingType}'
 ```
+## Aspect list for category 212
+aspectName| aspectValueName
+--- | ---
+Player | Not Specified
+Product | Box
+Query example
+```
+GET http://svcs.ebay.com/services/search/FindingService/v1
+   ?OPERATION-NAME=findCompletedItems
+   &SERVICE-VERSION=1.7.0
+   &SECURITY-APPNAME=<Cient ID>
+   &RESPONSE-DATA-FORMAT=JSON
+   &REST-PAYLOAD
+   &keywords=hobby%20box%20-break
+   &categoryId=212
+   &itemFilter(0).name=SoldItemsOnly
+   &itemFilter(0).value=true
+   &itemFilter(1).name=EndTimeFrom
+   &itemFilter(1).value=2019-04-01T00:00:00.000Z
+   &itemFilter(2).name=EndTimeTo
+   &itemFilter(2).value=2019-04-02T00:00:00.000Z
+   &sortOrder=EndTimeSoonest
+   &paginationInput.pageNumber=1
+   &aspectFilter(0).aspectName=Product
+   &aspectFilter(0).aspectValueName=Box
+Authorization: Bearer <accessToken>
+```
 
 ## API endpoint
 Environment | URL
